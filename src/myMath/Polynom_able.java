@@ -2,7 +2,6 @@ package myMath;
 
 import java.util.Iterator;
 
-
 /**
  * This interface represents a general Polynom: f(x) = a_1X^b_1 + a_2*X^b_2 ... a_n*Xb_n,
  * where: a_1, a_2 ... a_n are real numbers and b_1<b_2..<b_n are none negative integers (naturals)
@@ -41,7 +40,7 @@ public interface Polynom_able extends cont_function{
 	 */
 	public void add(Polynom_able p1);
 	/**
-	 * Add p1 to this Polynom
+	 * Add m1 to this Polynom
 	 * @param m1 Monom
 	 */
 	public void add(Monom m1);
@@ -65,7 +64,7 @@ public interface Polynom_able extends cont_function{
 	 * @param p1
 	 * @return true iff this polynom represents the same function as p1
 	 */
-	public boolean equals (Polynom_able p1);
+	public boolean equals (Object p1);
 	/**
 	 * Test if this is the Zero Polynom
 	 * @return
@@ -82,13 +81,11 @@ public interface Polynom_able extends cont_function{
 	 * @return
 	 */
 	public Polynom_able derivative();
-	 /**
+	/**
 	 * @return an Iterator (of Monoms) over this Polynom
 	 * @return
 	 */
 	public Iterator<Monom> iteretor();
 
-
-
+	public String toString();
 }
-

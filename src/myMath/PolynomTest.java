@@ -1,5 +1,6 @@
 package myMath;
 
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class PolynomTest {
@@ -20,7 +21,8 @@ public class PolynomTest {
         //MathTest(BadPoly);
         ComplexMath(SmallPoly);
         rootTest();
-
+        Polynom x= new Polynom();
+        Iterator<Monom> O = x.iteretor();
 
 
 

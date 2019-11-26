@@ -215,7 +215,7 @@ public class Polynom implements Polynom_able{
 	 * @return
 	 * @author Teddy Grossman
 	 */
-	@Override
+
 	public double area(double x0, double x1, double eps) {//done with no recursions since space wise it cannot support eps
 		double ans = 0;
 
@@ -279,6 +279,12 @@ public class Polynom implements Polynom_able{
 
 
 	}
+
+	@Override
+	public function initFromString(String s) {
+		return null;
+	}
+
 	//this has been inspired from GeekToGeek Website's code.
 	public  String sortbykey(Polynom p1){
 		String ans = "";
