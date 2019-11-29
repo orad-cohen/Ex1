@@ -154,7 +154,7 @@ public class Polynom implements Polynom_able{
 	 * @author Orad Cohen
 	 */
 	@Override
-	public boolean equals(Polynom_able p1) {//checks via Polynom's toString method if both have the same String value
+	public boolean equals(Object p1) {//checks via Polynom's toString method if both have the same String value
 		return this.toString().equals(p1.toString());}
 
 	/**
@@ -237,9 +237,7 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public Iterator<Monom> iteretor() {//return an iterator pf the Polynom's HashMap
-		Iterator it = MonomHashMap.entrySet().iterator();
-
-		return it;}
+		return (Iterator<Monom>) MonomHashMap;}
 
 	/**
 	 *
