@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 import java.util.ArrayList;
 /**
  * This class represents a simple (naive) tester for the Monom class, 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 2) -1.3x    	isZero: false  	eq: true  <br>
 3) -2.2x^2    	isZero: false  	eq: true  <br>
  */
-public class MonomTest {
+public class MonomTestx {
 	public static void main(String[] args) {
 		test1();
 		test2();

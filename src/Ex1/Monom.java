@@ -1,9 +1,7 @@
 
-package myMath;
+package Ex1;
 
 import java.util.Comparator;
-import java.util.IllegalFormatException;
-import java.text.DecimalFormat;
 
 /**
  * This class represents a simple "Monom" of shape a*x^b, where a is a real number and a is an integer (summed a none negative), 
@@ -173,6 +171,19 @@ public class Monom implements function{
 
 
 
+	}
+	public function initFromString(String s){
+
+			return null;
+
+	}
+	public function copy(){
+
+			return null;
+
+	} // clone
+	public boolean equals(Object obj){
+			return false;
 	}
 
 

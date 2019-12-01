@@ -1,4 +1,4 @@
-package myMath;
+package Ex1;
 
 import java.io.IOException;
 import java.util.Collection;

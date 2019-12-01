@@ -1,15 +1,10 @@
-package myMath;
+package Ex1;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.function.Predicate;
 import java.util.HashMap;
-import java.util.LinkedList;
 
-import groovy.ui.SystemOutputInterceptor;
-import myMath.Monom;
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
  * 1. Riemann's Integral: https://en.wikipedia.org/wiki/Riemann_integral
