@@ -1,8 +1,9 @@
-package Ex1;
+package Ex1Testing;
 
+import Ex1.Functions_GUI;
+import Ex1.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 /**
  * Partial JUnit + main test for the GUI_Functions class, expected output from the main:
  * 0) java.awt.Color[r=0,g=0,b=255]  f(x)= plus(-1.0x^4 +2.4x^2 +3.1,+0.1x^5 -1.2999999999999998x +5.0)
@@ -18,11 +19,11 @@ import org.junit.jupiter.api.Test;
  */
 class Functions_GUITest {
 	public static void main(String[] a) {
-		Functions_GUI data = FunctionsFactory();
+		//Functions_GUI data = FunctionsFactory();
 		int w=1000, h=600, res=200;
 		Range rx = new Range(-10,10);
 		Range ry = new Range(-5,15);
-		data.drawFunctions(w,h,rx,ry,res);
+	//	data.drawFunctions(w,h,rx,ry,res);
 	}
 	private Functions_GUI _data=null;
 //	@BeforeAll
@@ -31,7 +32,7 @@ class Functions_GUITest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		_data = FunctionsFactory();
+		//_data = FunctionsFactory();
 	}
 
 	//@Test
@@ -57,10 +58,10 @@ class Functions_GUITest {
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions();
+		//_data.drawFunctions();
 		//fail("Not yet implemented");
 	}
-	public static Functions_GUI FunctionsFactory() {
+	/*public static Functions_GUI FunctionsFactory() {
 		Functions_GUI ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";
 		String s2 = "5 +2x -3.3x +0.1x^5";
@@ -95,5 +96,5 @@ class Functions_GUITest {
 		ans.add(min);
 		
 		return ans;
-	}
+	}*/
 }
