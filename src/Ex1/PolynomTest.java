@@ -69,7 +69,7 @@ public class PolynomTest {
         Polynom_able copy = new Polynom();
         System.out.println("copy still not a copy of the polynom and should be 0, is it ?..."+ copy.isZero());
 
-        copy = p.copy();
+        //copy = p.copy();
         System.out.println("Testing copy method, entered Polynom is " + p.toString()+ "while the copy is"
                 + copy.toString());
 
