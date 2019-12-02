@@ -150,7 +150,23 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public boolean equals(Object p1) {//checks via Polynom's toString method if both have the same String value
-		return this.toString().equals(p1.toString());}
+		Polynom p2 = (Polynom) p1;
+		boolean ans = true;
+
+		for(Monom value: MonomHashMap.values()){
+			try{
+				double diff = value.get_coefficient()- p2.MonomHashMap.get(value.get_power()).get_coefficient();
+				if(Math.abs(diff)>0.000001){
+					return false;
+				}
+
+			}
+			catch(Exception e){
+
+				return  false; //doesnt have the same power.
+			}
+		}
+		return ans;}
 
 	/**
 	 * @return
@@ -173,8 +189,8 @@ public class Polynom implements Polynom_able{
 	public double root(double x0, double x1, double eps) {
 		if(Math.abs(f(x0))<eps){return x0;}//End condition if either f(x0) or f(x1) value is less the Epsilon
 		else if(Math.abs(f(x1))<eps){return x1;}
-		else if(Monom.roundAvoid(f((x0+x1)/2))>0){return Monom.roundAvoid(root(x0,(x0+x1)/2,eps));}//return root that maintains (f(x0)*f(x1)<0, but with smaller distance between x0 and x1;
-		else{return Monom.roundAvoid(root((x0+x1)/2,x1,eps));
+		else if((f((x0+x1)/2))>0){return root(x0,(x0+x1)/2,eps);}//return root that maintains (f(x0)*f(x1)<0, but with smaller distance between x0 and x1;
+		else{return root((x0+x1)/2,x1,eps);
 	}}
 
 	/**
