@@ -1,7 +1,7 @@
 package Ex1Testing;
 
-import Ex1.Functions_GUI;
-import Ex1.Range;
+import Ex1.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
@@ -61,7 +61,7 @@ class Functions_GUITest {
 		//_data.drawFunctions();
 		//fail("Not yet implemented");
 	}
-	/*public static Functions_GUI FunctionsFactory() {
+	public static Functions_GUI FunctionsFactory() {
 		Functions_GUI ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";
 		String s2 = "5 +2x -3.3x +0.1x^5";
@@ -96,5 +96,5 @@ class Functions_GUITest {
 		ans.add(min);
 		
 		return ans;
-	}*/
+	}
 }

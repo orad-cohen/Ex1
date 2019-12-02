@@ -1,34 +1,60 @@
 package Ex1;
 
+import java.util.function.Function;
+
 public class ComplexFunction implements complex_function{
-    Polynom Poly;
+    function left,right;
+    Operation Ope;
 
-    public ComplexFunction(Polynom p1){
-        Poly = p1;
+    public ComplexFunction(Object obj1){
+        left = (function)obj1;
+        Ope = Operation.None;
     }
-    public ComplexFunction(Operation Ope, Polynom p1, Polynom p2)
-    {
-        Poly = p1;
 
-        switch (Ope){
-            case Plus:  this.plus(p2);
-            case Div:   this.div(p2);
-            case Mul:   this.mul(p2);
-            case Max:   this.max(p2);
-            case Min:   this.min(p2);
+    public ComplexFunction(String Ope, Object obj1){
+        Operation p = StringOp(Ope);
+        left = (function)obj1;
+    }
+
+    public ComplexFunction(String Ope, Object obj1, Object obj2) {
+        Operation p = StringOp(Ope);
+        left = (function) obj1;
+        right = (function) obj2;
+    }
+
+    public Operation StringOp(String Ope){
+        switch (Ope) {
+            case "Plus":
+                return Operation.Plus;
+            case "Div":
+                return Operation.Div;
+            case "Mul":
+                return Operation.Mul;
+            case "Max":
+                return Operation.Max;
+            case "Min":
+                return Operation.Min;
+            case "":
+                return Operation.None;
+            default:
+                return Operation.Error;
         }
-
     }
+
 
 
     @Override
     public void plus(function f1) {
-
+        Polynom p;
+        p = (Polynom)left();
+        p.add((Polynom)f1);
     }
 
     @Override
     public void mul(function f1) {
-
+        Polynom p;
+        p = (Polynom)left();
+        p.multiply((Polynom)f1);
     }
 
     @Override
@@ -52,18 +78,14 @@ public class ComplexFunction implements complex_function{
     }
 
     @Override
-    public function left() {
-        return null;
-    }
+    public function left() { return this.left; }
 
     @Override
-    public function right() {
-        return null;
-    }
+    public function right() { return this.right; }
 
     @Override
     public Operation getOp() {
-        return null;
+        return this.Ope;
     }
 
     @Override
