@@ -3,8 +3,12 @@ package Ex1;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Tre
+
 
 public class Functions_GUI implements functions {
+    ComplexFunction
+
     @Override
     public void initFromFile(String file) throws IOException {
 

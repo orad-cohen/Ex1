@@ -13,6 +13,10 @@ public class ComplexFunction implements complex_function{
 
     public ComplexFunction(String Ope, Object obj1){
         Operation p = StringOp(Ope);
+        if(p == Operation.Plus||p == Operation.Div||p == Operation.Mul)
+        {
+            p = Operation.None;
+        }
         left = (function)obj1;
     }
 
@@ -84,9 +88,7 @@ public class ComplexFunction implements complex_function{
     public function right() { return this.right; }
 
     @Override
-    public Operation getOp() {
-        return this.Ope;
-    }
+    public Operation getOp() { return this.Ope; }
 
     @Override
     public double f(double x) {
@@ -95,7 +97,11 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function initFromString(String s) {
-        return null;
+        function ans;
+        Polynom p = new Polynom(s);
+        ans = p;
+
+        return ans;
     }
 
     @Override
