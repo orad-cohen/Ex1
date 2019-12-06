@@ -1,10 +1,11 @@
 package Ex1Testing;
 
-import Ex1.Polynom;
-import Ex1.Monom;
+import Ex1.*;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PolynomTest  {
     private Polynom p1,p2,p3,p4;
@@ -32,15 +33,15 @@ class PolynomTest  {
         for(int i=0;i<monoms.length;i++) {
             Monom m = new Monom(monoms[i]);
             p1.add(m);}
-        assertEquals(p1.toString(),new Polynom("3x^14-2x^2+1.7x^1+9").toString());
+        assertEquals(p1,new Polynom("3x^14-2x^2+1.7x^1+9"));
     }
 
     @Test
     void testAdd() {//Polynoms
         p2.add(p3);
         p4.add(p3);
-        assertEquals(p2.toString(),new Polynom("7x^2+10x^3+15x-3+20x^4+x^12").toString());
-        assertEquals(p4.toString(),new Polynom("3x^6-7+16x^3-4x^4+15x").toString());
+        assertEquals(p2,new Polynom("7x^2+10x^3+15x-3+20x^4+x^12"));
+        assertEquals(p4,new Polynom("3x^6-7+16x^3-4x^4+15x"));
     }
 
     @Test
@@ -48,23 +49,39 @@ class PolynomTest  {
         p3.substract(p3);
         p4.substract(p2);
         assertEquals(p3.toString(),"0");
-        assertEquals(p4.toString(), new Polynom("-24x^4"));
+        assertEquals(p4, new Polynom("-24x^4-x^12+6x^3+3x^6-7x^2-4"));
     }
 
     @Test
-    void multiply() {
+    void multiply() {// Multiply by monom
+        Monom m1 = new Monom("-3.2x^2");
+        p3.multiply(m1);
+        p4.multiply(new Monom("0"));
+        assertEquals(p3,new Polynom("-48x^3+9.6x^2-48x^5-38.4x^6"));
+        assertEquals(p4,new Polynom("0"));
+    }
+
+    @Test
+    void testMultiply() {// Multiply by polynom
+        p2.multiply(p3);
+        p3.multiply(p4);
+        assertEquals(p2,new Polynom("12.0x^16+15.0x^15+15.0x^13-3.0x^12+96.0x^8+60.0x^7+9.0x^6+225.0x^5-99.0x^4+120.0x^3-21.0x^2"));
+        assertEquals(p3,new Polynom("36.0x^10+45.0x^9-192.0x^8-183.0x^7+6.0x^6-240.0x^5+15.0x^4-63.0x^3-60.0x^1+12.00"));
     }
 
     @Test
     void testEquals() {
+
     }
 
     @Test
     void isZero() {
+        assertTrue(p1.isZero());
     }
 
     @Test
     void root() {
+        double[][] res = {{0,0.2135},{0,0.83334},{2.404,0.9999}};
     }
 
     @Test
@@ -83,9 +100,7 @@ class PolynomTest  {
     void iteretor() {
     }
 
-    @Test
-    void testMultiply() {
-    }
+
 
     @Test
     void testToString() {
@@ -93,6 +108,9 @@ class PolynomTest  {
 
     @Test
     void initFromString() {
+        String s = "Mul(Div(Plus(Plus(3.0x^2+1.00,4.0x^5-2.00),4.0x^5-2.00),3.0x^2+1.00),3.0x^2+1.00)";
+        function f = p1.initFromString(s);
+        System.out.println(f);
     }
 
     @Test

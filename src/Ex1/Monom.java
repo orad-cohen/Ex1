@@ -164,7 +164,7 @@ public class Monom implements function{
 	public static double roundAvoid(double value) {//round a double to the 7th number after decimal
 			String Dou = ""+value;
 			int Dec = Dou.indexOf('.')+8;
-			int wow = Dou.length();
+
 			if(Dec>=Dou.length()){return Double.parseDouble(Dou);}
 			else{
 				return Double.parseDouble(Dou.substring(0, Dec));}
@@ -183,7 +183,8 @@ public class Monom implements function{
 
 	} // clone
 	public boolean equals(Object obj){
-			return false;
+		return false;
+			//return _coefficient==obj.coefficient&&;
 	}
 
 
