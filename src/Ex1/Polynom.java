@@ -292,35 +292,37 @@ public class Polynom implements Polynom_able{
 	@Override
 	public function initFromString(String sp) {
 		String s = sp.toLowerCase();
-		int[] OpeArray = {s.lastIndexOf("plus"), s.lastIndexOf("mul"),s.lastIndexOf("div"),s.lastIndexOf("max"),s.lastIndexOf("min")};
-
-		int last=0;
+		int[] OpeArray = {s.indexOf("plus"), s.indexOf("mul"),s.indexOf("div"),s.indexOf("max"),s.indexOf("min")};
+		int first=0;
 		for(int i = 0;i<OpeArray.length;i++){
-			if (last<OpeArray[i]){
-				last = OpeArray[i];
+			if (first>OpeArray[i]&&OpeArray[i]!=-1){
+				first = OpeArray[i];
 			}
 		}
-		int bra1 = s.indexOf('(',last);
-		int bra2 = s.indexOf(')',bra1);
-		int c = s.indexOf(',',bra1);
-		String check =s.substring(bra1+1,c);
-		String check2 = s.substring(c+1,bra2);
-		function f1 =new Polynom(s.substring(bra1,c));
-		function f2 =new Polynom(s.substring(c,bra2 ));
-		String ope = (s.substring(last,bra1));
-		String Part1 = s.substring(0,last);
-		String Part2 = s.substring(bra2);
-		String newStr = Part1+Part2;
-		if(newStr.length()==0){
+		int bra1 = s.indexOf('(');
+		int bra2 = s.lastIndexOf(')');
+
+		String ope = (s.substring(first,bra1));
+		if(s.length()>=0&&s.indexOf(")")==s.length()-1){
+			int c = s.lastIndexOf(',');
+			function f1 =new Polynom(s.substring(bra1+1,c));
+			function f2 =new Polynom(s.substring(c+1,bra2 ));
 			return new ComplexFunction(ope,f1,f2);
 		}
+		else if(s.lastIndexOf(',')-1==s.lastIndexOf("),")){
+			int c = s.lastIndexOf(',');
+			String newStr = s.substring(bra1+1,c);
+			function ff1 = new ComplexFunction(initFromString(newStr));
+			function ff2 = new Polynom(s.substring(c+1,bra2));
+			function ff = new ComplexFunction(ope,ff1,ff2);
+			return  ff;
+		}
 		else{
-			ComplexFunction f3 = new ComplexFunction(ope,f1,f2);
-			return new ComplexFunction(ope,f3,initFromString(newStr));
+			int c = s.indexOf(',');
+			String newStr = s.substring(c+1,bra2);
+			return new ComplexFunction(ope,new Polynom(s.substring(bra1+1,c)),initFromString(newStr));
 
 		}
-
-
 
 	}
 
