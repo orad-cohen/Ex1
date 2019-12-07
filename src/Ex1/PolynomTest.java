@@ -1,7 +1,5 @@
 package Ex1;
 
-import java.util.Iterator;
-
 public class PolynomTest {
     public static void main(String[] args) {
         String[] GoodPoly = {"1+x+x^1-x^3", "7x^2-5x^3+1x^122+8x^12","122-13+17x^4-9x^2",
@@ -14,14 +12,14 @@ public class PolynomTest {
         String[] BadMonoms = {"x^-2","4x^2.2","4.5^3","4xx","   ","-3.2"};
         test1(GoodMonoms);
         //test1(BadMonoms);
-        test2(GoodMonoms);
+       // test2(GoodMonoms);
         //test2(BadPoly);
-        MathTest(GoodPoly);
+       // MathTest(GoodPoly);
         //MathTest(BadPoly);
-        ComplexMath(SmallPoly);
-        rootTest();
-        Polynom x= new Polynom();
-        Iterator<Monom> O = x.iteretor();
+        //ComplexMath(SmallPoly);
+      //  rootTest();
+       // Polynom x= new Polynom();
+       // Iterator<Monom> O = x.iteretor();
 
 
 
@@ -30,14 +28,14 @@ public class PolynomTest {
 
     }
     public static void test1(String[] monoms) {
-        Polynom p1 = new Polynom();
-        for(int i=0;i<monoms.length;i++) {
-            Monom m = new Monom(monoms[i]);
-            p1.add(m);}
-        double aa = p1.area(0, 1, 0.0001);
-        System.out.println(p1.toString());
-        p1.substract(p1);
-        System.out.println(p1.toString());
+        Polynom p2,p3,p4;
+        p2 = new Polynom("7x^2-5x^3+1x^12+8x^4");
+        p3 = new Polynom("0+15x-3+15x^3+12x^4");
+        p4 = new Polynom("3x^6-4+x^3-16x^4");
+        p2.multiply(p3);
+        p3.multiply(p4);
+        System.out.println(p2.toString());
+        System.out.println(p3.toString());
     }
     public static void test2(String[] monoms1) {
         Polynom p1 = new Polynom(), p2 =  new Polynom();

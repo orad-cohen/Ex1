@@ -1,21 +1,31 @@
 package Ex1;
 
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Tre
-
 
 public class Functions_GUI implements functions {
-    ComplexFunction
+    ArrayList<function> ff = new ArrayList<function>();
+
 
     @Override
     public void initFromFile(String file) throws IOException {
+        ComplexFunction compFunc = null;
+        String[] lines = file.split("\n");
+        for(int i = 0; i<lines.length;i++){
+            ff.add(compFunc.initFromString(lines[i]));        }
 
     }
 
     @Override
     public void saveToFile(String file) throws IOException {
+        FileWriter save= new FileWriter("output.txt");
+        for(int i = 0; i<ff.size();i++){
+            save.write(ff.get(i).toString()+"\n");
+
+        }
 
     }
 
