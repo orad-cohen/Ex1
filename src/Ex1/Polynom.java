@@ -301,7 +301,7 @@ public class Polynom implements Polynom_able{
 		}
 		int bra1 = s.indexOf('(');
 		int bra2 = s.lastIndexOf(')');
-
+		int debug = s.length();
 		String ope = (s.substring(first,bra1));
 		if(s.length()>=0&&s.indexOf(")")==s.length()-1){
 			int c = s.lastIndexOf(',');
@@ -309,18 +309,20 @@ public class Polynom implements Polynom_able{
 			function f2 =new Polynom(s.substring(c+1,bra2 ));
 			return new ComplexFunction(ope,f1,f2);
 		}
+		else if(s.lastIndexOf(',')-1!=s.lastIndexOf("),")){
+			int c = s.lastIndexOf("),");
+			return new ComplexFunction(ope,initFromString(s.substring(bra1+1,c+1 )),initFromString(s.substring(c+2, bra2)));
+
+		}
 		else if(s.lastIndexOf(',')-1==s.lastIndexOf("),")){
 			int c = s.lastIndexOf(',');
-			String newStr = s.substring(bra1+1,c);
-			function ff1 = new ComplexFunction(initFromString(newStr));
-			function ff2 = new Polynom(s.substring(c+1,bra2));
-			function ff = new ComplexFunction(ope,ff1,ff2);
-			return  ff;
+
+			return  new ComplexFunction(ope,initFromString(s.substring(bra1+1,c)),new Polynom(s.substring(c+1,bra2)));
 		}
 		else{
 			int c = s.indexOf(',');
-			String newStr = s.substring(c+1,bra2);
-			return new ComplexFunction(ope,new Polynom(s.substring(bra1+1,c)),initFromString(newStr));
+
+			return new ComplexFunction(ope,new Polynom(s.substring(bra1+1,c)),initFromString(s.substring(c+1,bra2)));
 
 		}
 
