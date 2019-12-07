@@ -1,17 +1,24 @@
 package Ex1;
 
 public class ComplexFunction implements complex_function{
-    ComplexFunction parent;
-    function left,right;
-    Operation Ope;
+
+    private function left,right;
+    private Operation Ope;
     List list;
 
 
     public ComplexFunction(Object obj1){
-        left = (function)obj1;
-        Ope = Operation.None;
+        if(obj1 instanceof ComplexFunction){
+            left =((ComplexFunction) obj1).left;
+            right=((ComplexFunction) obj1).right;
+            Ope = ((ComplexFunction) obj1).Ope;
+        }
+
 
     }
+
+
+
 
     public ComplexFunction(Operation Oper, Object obj1, Object obj2) {
 
@@ -22,32 +29,28 @@ public class ComplexFunction implements complex_function{
         }
 
     public ComplexFunction(String Oper, Object obj1, Object obj2) {
-        if(obj1 instanceof ComplexFunction){
-            left = new ComplexFunction(obj1);
-            right = (function)obj2;
-        }
-        else{
+
             left = (function)obj1;
             right = (function)obj2;
             Ope = StringOp(Oper);
 
-        }
 
-        //list = new List(Oper,f1,f2);
+
+
 
     }
 
     public Operation StringOp(String Ope){
         switch (Ope) {
-            case "Plus":
+            case "plus":
                 return Operation.Plus;
-            case "Div":
+            case "div":
                 return Operation.Div;
-            case "Mul":
+            case "mul":
                 return Operation.Mul;
-            case "Max":
+            case "max":
                 return Operation.Max;
-            case "Min":
+            case "min":
                 return Operation.Min;
             case "":
                 return Operation.None;
@@ -162,7 +165,8 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function initFromString(String s) {
-        return  null;
+        Polynom p1 = new Polynom();
+        return p1.initFromString(s);
 
 
 
