@@ -38,6 +38,9 @@ public class Functions_GUI implements functions {
     public void drawFunctions(String json_file) {
 
     }
+    public function get(int index){
+        return ff.get(index);
+    }
 
     @Override
     public int size() {
