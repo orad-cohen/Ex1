@@ -17,8 +17,14 @@ public class Monom implements function{
 	public static final Comparator<Monom> _Comp = new Monom_Comperator();
 	public static Comparator<Monom> getComp() {return _Comp;}
 	public Monom(double a, int b){
-		this.set_coefficient(a);
-		this.set_power(b);
+		if(a == 0){
+			this.set_coefficient(0);
+			this.set_power(0);
+		}
+		else {
+			this.set_coefficient(a);
+			this.set_power(b);
+		}
 	}
 	public Monom(Monom ot) {
 		this(ot.get_coefficient(), ot.get_power());
@@ -76,8 +82,15 @@ public class Monom implements function{
 			else {
 				if(i0<0)  {Po = 0;}
 			}
-			set_coefficient(Co);
-			set_power(Po);
+
+			if(Co == 0){
+				set_coefficient(0);
+				set_power(0);
+			}
+			else {
+				set_coefficient(Co);
+				set_power(Po);
+			}
 
 		}
 		catch(Exception e) {

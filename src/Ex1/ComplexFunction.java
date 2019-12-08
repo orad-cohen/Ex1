@@ -22,7 +22,6 @@ public class ComplexFunction implements complex_function{
             Ope = Operation.None;
         }
 
-
     }
 
     public ComplexFunction(Operation Oper, Object obj1, Object obj2) {
@@ -38,10 +37,6 @@ public class ComplexFunction implements complex_function{
             left = (function)obj1;
             right = (function)obj2;
             Ope = StringOp(Oper);
-
-
-
-
 
     }
 
