@@ -3,6 +3,8 @@ package Ex1;
  * This interface represents a collection of mathematical functions
  *  which can be presented on a GUI window and can be saved (and load) to file. 
  */
+
+
 import java.io.IOException;
 import java.util.Collection;
 

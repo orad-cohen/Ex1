@@ -53,43 +53,38 @@ public class Monom implements function{
 	 * @author Orad Cohen
 	 */
 	public Monom(String s) {
+
+		double Co = 1;
+		int Po = 1;
 		try {
-			set_coefficient(Double.parseDouble(s));//try to parse double, if work the monom is of power 0
-			set_power(0);}
-		catch (Exception e) {
-			int k = s.indexOf('x');
-			if (s.charAt(0) == '0') {//take care of unique cases
-				set_power(0);
-				set_coefficient(0);
-			}
-			else if(s.length()==1){
-				if(s.charAt(0)=='1'){
-					set_power(0);
-					set_coefficient(1);}
-				else if(s.charAt(0)=='x'){
-					set_power(1);
-					set_coefficient(1);}
-			}
-			else if (s.length() == k + 1) {//if x is in the end set the coefficient only
-				set_power(1);
-				set_coefficient(s.substring(0, k));
-			} else if (k == 0) {//Check the string in relation to the x,
-				set_coefficient(1);
-				if (s.length() == k + 1) {
-					set_power(1);
-				}// check if "x" is the only string.
-				else {//else-> check if the power is non negative, and act accordingly
-					set_power(s.substring(k + 2));
+			s = s.toLowerCase();
+			int i0 = s.indexOf("x");
+			int i2 = s.indexOf("-x");
+			int i3 = s.indexOf("x^");
+			if(i2>=0) {Co=-1;}
+			else {
+				if(i0>0) {
+					Co = Double.parseDouble(s.substring(0,i0));
 				}
-			} else if (k == 1) {
-				set_coefficient(s.substring(0, k));
-				set_power(s.substring(k + 2));
-			} else {//set the power and coefficient normally.
-				set_power(s.substring(k + 2));
-				set_coefficient(s.substring(0, k));
+				if(i0<0) {
+					Co = Double.parseDouble(s);
+				}
 			}
+			if(i3>=0) {
+				Po = Integer.parseInt(s.substring(i3+2));
+			}
+			else {
+				if(i0<0)  {Po = 0;}
+			}
+			set_coefficient(Co);
+			set_power(Po);
 
 		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+
 
 
 
@@ -162,7 +157,8 @@ public class Monom implements function{
 
 		}
 	public static double roundAvoid(double value) {//round a double to the 7th number after decimal
-			String Dou = ""+value;
+			return value;}
+			/*String Dou = ""+value;
 			int Dec = Dou.indexOf('.')+8;
 
 			if(Dec>=Dou.length()){return Double.parseDouble(Dou);}
@@ -171,7 +167,7 @@ public class Monom implements function{
 
 
 
-	}
+	}*/
 	public function initFromString(String s){
 
 			return null;

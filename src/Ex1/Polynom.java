@@ -36,6 +36,7 @@ public class Polynom implements Polynom_able{
 	 */
 	public Polynom(String s) {//initialize Polynom from a given String
 		int pre=0;
+		s = s.replace(" ","");
 		Polynom tmp = new Polynom();
 		//divide the String by math operators "+" and "-" and add them to the Polynom using the Polynom add method
 		for(int i = 0 ; i<s.length();i++){
@@ -290,8 +291,11 @@ public class Polynom implements Polynom_able{
 	}
 
 	@Override
-	public function initFromString(String sp) {
-		String s = sp.toLowerCase();
+	public function initFromString(String s) {
+		if(!s.endsWith(")")){
+			return new Polynom(s);
+		}
+		s = s.toLowerCase().replace(" ","");
 		int[] OpeArray = {s.indexOf("plus"), s.indexOf("mul"),s.indexOf("div"),s.indexOf("max"),s.indexOf("min")};
 		int first=0;
 		for(int i = 0;i<OpeArray.length;i++){
@@ -299,32 +303,31 @@ public class Polynom implements Polynom_able{
 				first = OpeArray[i];
 			}
 		}
+
+
+		int counter = 1;
 		int bra1 = s.indexOf('(');
 		int bra2 = s.lastIndexOf(')');
-		int debug = s.length();
 		String ope = (s.substring(first,bra1));
+		int c =0;
+		for(int x = bra1+1; x<s.length()&&counter!=0;x++){
+			if(s.charAt(x)==','){
+				counter--;}
+			else if(s.charAt(x)=='('){
+				counter++;
+			}
+			c=x;
+		}
+
 		if(s.length()>=0&&s.indexOf(")")==s.length()-1){
-			int c = s.lastIndexOf(',');
 			function f1 =new Polynom(s.substring(bra1+1,c));
 			function f2 =new Polynom(s.substring(c+1,bra2 ));
 			return new ComplexFunction(ope,f1,f2);
 		}
-		else if(s.lastIndexOf(',')-1!=s.lastIndexOf("),")){
-			int c = s.lastIndexOf("),");
-			return new ComplexFunction(ope,initFromString(s.substring(bra1+1,c+1 )),initFromString(s.substring(c+2, bra2)));
-
-		}
-		else if(s.lastIndexOf(',')-1==s.lastIndexOf("),")){
-			int c = s.lastIndexOf(',');
-
-			return  new ComplexFunction(ope,initFromString(s.substring(bra1+1,c)),new Polynom(s.substring(c+1,bra2)));
-		}
 		else{
-			int c = s.indexOf(',');
-
-			return new ComplexFunction(ope,new Polynom(s.substring(bra1+1,c)),initFromString(s.substring(c+1,bra2)));
-
+			return new ComplexFunction(ope,initFromString(s.substring(bra1+1,c )),initFromString(s.substring(c+1,bra2)));
 		}
+
 
 	}
 

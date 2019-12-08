@@ -4,7 +4,7 @@ public class ComplexFunction implements complex_function{
 
     private function left,right;
     private Operation Ope;
-    List list;
+    private Polynom p1 = new Polynom();
 
 
     public ComplexFunction(Object obj1){
@@ -13,12 +13,17 @@ public class ComplexFunction implements complex_function{
             right=((ComplexFunction) obj1).right;
             Ope = ((ComplexFunction) obj1).Ope;
         }
+        else if (obj1 instanceof Monom){
+            left = new Polynom(obj1.toString());
+            Ope =Operation.None;
+        }
+        else{
+            left = (function)obj1;
+            Ope = Operation.None;
+        }
 
 
     }
-
-
-
 
     public ComplexFunction(Operation Oper, Object obj1, Object obj2) {
 
@@ -160,76 +165,72 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public double f(double x) {
-        return 0;
+        switch (getOp()){
+            case Plus:
+                return left.f(x)+right.f(x);
+
+            case Div:
+                if(right.f(x)==0){
+                    return Double.POSITIVE_INFINITY;
+                }
+                return left.f(x)/right.f(x);
+            case Mul:
+                return left.f(x)*right.f(x);
+            case Max:
+                if(left.f(x)>right.f(x)){
+                    return left.f(x);
+                }
+                else{
+                    return right.f(x);
+                }
+            case Min:
+                if(left.f(x)<right.f(x)){
+                    return left.f(x);
+                }
+                else{
+                    return right.f(x);
+                }
+            case Comp:
+                return left.f(right.f(x));
+            default:
+                throw new RuntimeException();
+
+
+
+
+        }
+
+
     }
 
     @Override
     public function initFromString(String s) {
-        Polynom p1 = new Polynom();
-        return p1.initFromString(s);
-
-
-
-
-    }
+        function ff = p1.initFromString(s);
+        return ff    ;}
 
     @Override
     public function copy() {
-        return null;
+        Polynom p1 = new Polynom();
+        String s = toString();
+        function ff = p1.initFromString(s);
+        return ff;
     }
 
     public String toString(){
 
         return Ope+"("+left.toString()+","+right.toString()+")";
 
-
-
-
-       /* if(left instanceof ComplexFunction){
-            ComplexFunction temp = (ComplexFunction)left;
-            return temp.left.toString();
-        }
-        else{
-            return Ope + "("+left.toString()+","+right.toString()+")";
-
-        }*/
-
-
-
-
-
     }
 
 
 
-    class List{
-        ComplexFunction func;
-        List Next = null;
-
-        public List(function f1){
-            func.left=f1;
-            func.Ope=Operation.None;
-
-        }
-        public List(String s, function f1, function f2){
-            func.left=f1;
-            func.right=f2;
-            func.Ope = StringOp(s);
-        }
-
-        public void addFunc(Operation ope, function f1){
-            Next.func.left=func;
-            Next.func.right=f1;
-            Next.func.Ope = ope;
-
-        }
 
 
 
 
 
 
-    }
+
 
 
 

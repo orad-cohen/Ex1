@@ -2,6 +2,7 @@ package Ex1Testing;
 
 import Ex1.*;
 
+import org.json.simple.parser.ParseException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
@@ -19,11 +20,13 @@ import org.junit.jupiter.api.Test;
  */
 class Functions_GUITest {
 	public static void main(String[] a) {
-		//Functions_GUI data = FunctionsFactory();
+		Functions_GUI ans = new Functions_GUI("plus(div(+1.0x +1.0,mul(mul(+1.0x +3.0,+1.0x -2.0),+1.0x -4.0)),2.0)");
 		int w=1000, h=600, res=200;
 		Range rx = new Range(-10,10);
 		Range ry = new Range(-5,15);
-	//	data.drawFunctions(w,h,rx,ry,res);
+		ans.drawFunctions(w,h,rx,ry,res);
+		Functions_GUI data = FunctionsFactory();
+		data.drawFunctions(w,h,rx,ry,res);
 	}
 	private Functions_GUI _data=null;
 //	@BeforeAll
@@ -35,9 +38,14 @@ class Functions_GUITest {
 		//_data = FunctionsFactory();
 	}
 
-	//@Test
+
 	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
+	Functions_GUI ans = new Functions_GUI("Plus(Div(1.0x^1+1.00,Mul(Mul(1.0x^1+3.00,1.0x^1-2.00),1.0x^1-4.00)),2.00)");
+	int w=1000, h=600, res=200;
+	Range rx = new Range(-10,10);
+	Range ry = new Range(-5,15);
+	ans.drawFunctions(w,h,rx,ry,res);
+
 	}
 
 	//@Test
@@ -50,8 +58,17 @@ class Functions_GUITest {
 	//	fail("Not yet implemented");
 	}
 
-	//@Test
-	void testDrawFunctions() {
+	@Test
+	void testDrawFunctions() throws ParseException {
+		String json_file = "{\n" +
+				"\t\"Width\":1000,\n" +
+				"\t\"Height\":600,\n" +
+				"\t\"Resolution\":200,\n" +
+				"\t\"Range_X\":[-10,10],\n" +
+				"\t\"Range_Y\":[-5,15]\n" +
+				"}";
+		Functions_GUI data = new Functions_GUI();
+		data.drawFunctions(json_file);
 		//_data.drawFunctions();
 	//	fail("Not yet implemented");
 	}
