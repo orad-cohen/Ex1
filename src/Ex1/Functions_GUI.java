@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,21 +24,30 @@ public class Functions_GUI implements functions {
 
     @Override
     public void initFromFile(String file) throws IOException {
-        ComplexFunction compFunc = null;
-        String[] lines = file.split("\n");
-        for(int i = 0; i<lines.length;i++){
-            functionsArray.add(compFunc.initFromString(lines[i]));        }
+        FileReader fr = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fr);
+        String line;
+        ComplexFunction compFunc = new ComplexFunction();
+        while((line = reader.readLine())!=null){
+            functionsArray.add(compFunc.initFromString(line));
+
+
+        }
+        fr.close();
+        reader.close();
+
 
     }
 
     @Override
     public void saveToFile(String file) throws IOException {
-        FileWriter save= new FileWriter("output.txt");
+        FileWriter save= new FileWriter(file);
         for(int i = 0; i<functionsArray.size();i++){
             save.write(functionsArray.get(i).toString()+"\n");
 
         }
-
+        save.flush();
+        save.close();
     }
 
     @Override
@@ -52,8 +62,6 @@ public class Functions_GUI implements functions {
         for (int i=0; i<=n; i++) {
             x[i] = x0;
             for(int a=0;a<size;a++) {
-
-
                 yy[a][i] = functionsArray.get(a).f(x[i]);
             }
             x0+=x_step;
@@ -84,6 +92,7 @@ public class Functions_GUI implements functions {
         }
         catch (Exception e){
             drawFunctions("GUI_params.txt");
+            return;
         }
         JSONObject jo = (JSONObject) obj;
         JSONArray ry = (JSONArray) jo.get("Range_Y");
@@ -126,12 +135,12 @@ public class Functions_GUI implements functions {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return functionsArray.toArray();
     }
 
     @Override
     public <T> T[] toArray(T[] ts) {
-        return null;
+        return functionsArray.toArray(ts);
     }
 
     @Override

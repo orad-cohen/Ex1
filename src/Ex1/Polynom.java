@@ -311,8 +311,6 @@ public class Polynom implements Polynom_able{
 				first = OpeArray[i];
 			}
 		}
-
-
 		int counter = 1;
 		int bra1 = s.indexOf('(');
 		int bra2 = s.lastIndexOf(')');

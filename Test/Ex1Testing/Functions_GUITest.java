@@ -27,7 +27,6 @@ class Functions_GUITest {
 		int w=1000, h=600, res=200;
 		Range rx = new Range(-10,10);
 		Range ry = new Range(-5,15);
-		data.drawFunctions(w,h,rx,ry,res);
 		String file = "function_file.txt";
 		String file2 = "function_file2.txt";
 		try {
@@ -35,11 +34,12 @@ class Functions_GUITest {
 			Functions_GUI data2 = new Functions_GUI();
 			data2.initFromFile(file);
 			data.saveToFile(file2);
+			data.drawFunctions("asfasf");
 		}
 		catch(Exception e) {e.printStackTrace();}
 
 		String JSON_param_file = "GUI_params.txt";
-		data.drawFunctions(JSON_param_file);
+		//data.drawFunctions(JSON_param_file);
 	}
 	private functions _data=null;
 //	@BeforeAll
@@ -75,7 +75,7 @@ class Functions_GUITest {
 
 	@Test
 	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions("GUI_params.txt");
+		//_data.drawFunctions("GUI_params.txt");
 		//fail("Not yet implemented");
 	}
 	public static functions FunctionsFactory() {
