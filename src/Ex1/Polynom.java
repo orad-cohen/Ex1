@@ -145,18 +145,26 @@ public class Polynom implements Polynom_able{
 	}
 
 	/**
-	 * @param p1
+	 * @param obj
 	 * @return
 	 * @author Orad Cohen
 	 */
 	@Override
-	public boolean equals(Object p1) {//checks via Polynom's toString method if both have the same String value
-		Polynom p2 = (Polynom) p1;
+	public boolean equals(Object obj) {//checks via Polynom's toString method if both have the same String value
+		Polynom p1;
+		if(obj instanceof Monom){
+			p1 = new Polynom((obj.toString()));
+
+		}
+		else{
+			p1 = (Polynom)obj;
+		}
+
 		boolean ans = true;
 
 		for(Monom value: MonomHashMap.values()){
 			try{
-				double diff = value.get_coefficient()- p2.MonomHashMap.get(value.get_power()).get_coefficient();
+				double diff = value.get_coefficient()- p1.MonomHashMap.get(value.get_power()).get_coefficient();
 				if(Math.abs(diff)>0.000001){
 					return false;
 				}

@@ -210,12 +210,25 @@ public class ComplexFunction implements complex_function{
         function ff = p1.initFromString(s);
         return ff;
     }
+    @Override
+    public boolean equals(Object obj){
+        ComplexFunction c1= this;
+        ComplexFunction c2= new ComplexFunction(obj);
+        return equals(c1, c2);
+    }
+
+    public boolean equals(ComplexFunction obj1, ComplexFunction obj2){
+
+        return obj1.right.equals(obj2.right)&&obj1.left.equals(obj2.left)||obj1.right.equals(obj2.left)&&obj1.left.equals(obj2.right);
+
+
+    }
 
     public String toString(){
-
         return Ope+"("+left.toString()+","+right.toString()+")";
 
     }
+
 
 
 
