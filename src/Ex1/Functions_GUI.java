@@ -1,9 +1,9 @@
 package Ex1;
 
 
-import org.json.simple.JSONArray;
+/*import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.JSONParser;*/
 
 import java.awt.*;
 import java.io.BufferedReader;
@@ -83,7 +83,7 @@ public class Functions_GUI implements functions {
 
     @Override
     public void drawFunctions(String json_file)  {
-        Object obj = null;
+       /* Object obj = null;
         try{
             JSONParser jp = new JSONParser();
             FileReader fr = new FileReader(json_file);
@@ -106,7 +106,7 @@ public class Functions_GUI implements functions {
         double x2 = Double.parseDouble(rx.get(1).toString());
         Range yy = new Range(y1, y2);
         Range xx = new Range(x1, x2);
-        drawFunctions(width, height, xx, yy, res);
+        drawFunctions(width, height, xx, yy, res);*/
     }
 
     public function get(int index){
