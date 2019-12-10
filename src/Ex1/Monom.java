@@ -29,6 +29,10 @@ public class Monom implements function{
 	public Monom(Monom ot) {
 		this(ot.get_coefficient(), ot.get_power());
 	}
+	public Monom(){
+		set_coefficient(0);
+		set_power(0);
+	}
 	
 	public double get_coefficient() {
 		return roundAvoid(this._coefficient);
@@ -183,12 +187,12 @@ public class Monom implements function{
 	}*/
 	public function initFromString(String s){
 
-			return new Monom(s);
+		return new Monom(s);
 
 	}
 	public function copy(){
-
-			return null;
+		Monom copy = new Monom(this.get_coefficient(),this.get_power());
+		return copy;
 
 	} // clone
 	//do this
@@ -196,7 +200,7 @@ public class Monom implements function{
 		if(obj instanceof Polynom){
 			Polynom p1 = new Polynom();
 			p1.add(this);
-			if(p1.equals(obj)){return true;}
+			return p1.equals(obj);
 		}
 		if(obj instanceof Monom){
 			if(this.get_power() == ((Monom) obj).get_power()) {
@@ -209,7 +213,7 @@ public class Monom implements function{
 		}
 		if(obj instanceof ComplexFunction){
 			ComplexFunction c1 = new ComplexFunction(this);
-			if(c1.equals(obj)){return true;}
+			return c1.equals(obj);
 		}
 		return false;
 			//return _coefficient==obj.coefficient&&;

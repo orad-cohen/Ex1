@@ -18,7 +18,7 @@ public class ComplexFunction implements complex_function{
             Ope = ((ComplexFunction) obj1).Ope;
         }
         else if (obj1 instanceof Monom){
-            left = new Polynom(obj1.toString());
+            left = new Monom(obj1.toString());
             Ope =Operation.None;
         }
         else{
@@ -188,6 +188,9 @@ public class ComplexFunction implements complex_function{
                 }
             case Comp:
                 return left.f(right.f(x));
+            case None:
+                return left.f(x);
+
             default:
                 throw new RuntimeException();
 

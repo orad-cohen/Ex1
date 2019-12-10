@@ -108,7 +108,7 @@ class PolynomTest  {
 
     @Test
     void initFromString() {//Div(Plus(Plus(3.0x^2+1.00,4.0x^5-2.00),Plus(3.0x^2+1.00,4.0x^5-2.00)),Plus(3.0x^2+1.00,4.0x^5-2.00),Div(3.0x^2+1.00,4.0x^5-2.00))
-        String s = "Div(Plus(Plus(3.0x^2+1.00,4.0x^5-2.00),Plus(3.0x^2+1.00,4.0x^5-2.00)),Plus(3.0x^2+1.00,4.0x^5-2.00))";
+        String s = "X^2+4x^3";
         function f = p1.initFromString(s);
         System.out.println(f);
     }
