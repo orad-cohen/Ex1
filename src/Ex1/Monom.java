@@ -191,7 +191,19 @@ public class Monom implements function{
 			return null;
 
 	} // clone
+	//do this
 	public boolean equals(Object obj){
+		if(obj instanceof Polynom){
+			Polynom p1 = new Polynom();
+			p1.add(this);
+			if(p1.equals(obj)){return true;}
+		}
+		if(obj instanceof Monom){
+			if(this.get_coefficient()==((Monom) obj).get_coefficient()&&
+					this.get_power()==((Monom) obj).get_power()){
+				return true;
+			}
+		}
 		return false;
 			//return _coefficient==obj.coefficient&&;
 	}

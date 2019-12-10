@@ -6,6 +6,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ComplexFunctionTest {
+    private Polynom p1,p2;
+
 
 
     @BeforeEach
@@ -16,8 +18,7 @@ class ComplexFunctionTest {
 
     @Test
     void plus() {
-        Polynom p1 = new Polynom("3x^2+1");
-        Polynom p2 = new Polynom("4x^5-2");
+
 
         ComplexFunction cf = new ComplexFunction(p1);
         cf.plus(p2);

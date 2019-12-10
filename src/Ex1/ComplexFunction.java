@@ -3,10 +3,14 @@ package Ex1;
 public class ComplexFunction implements complex_function{
 
     private function left,right;
-    private Operation Ope;
+    private Operation Ope= Operation.None;
     private Polynom p1 = new Polynom();
 
-
+    public ComplexFunction(){
+        left = new Polynom("0");
+        right = left.copy();
+        Ope = Operation.None;
+    }
     public ComplexFunction(Object obj1){
         if(obj1 instanceof ComplexFunction){
             left =((ComplexFunction) obj1).left;
@@ -235,7 +239,6 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function copy() {
-        Polynom p1 = new Polynom();
         String s = toString();
         function ff = p1.initFromString(s);
         return ff;
