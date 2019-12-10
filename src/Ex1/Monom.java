@@ -183,7 +183,7 @@ public class Monom implements function{
 	}*/
 	public function initFromString(String s){
 
-			return null;
+			return new Monom(s);
 
 	}
 	public function copy(){

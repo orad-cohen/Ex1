@@ -240,8 +240,7 @@ public class ComplexFunction implements complex_function{
     @Override
     public function copy() {
         String s = toString();
-        function ff = p1.initFromString(s);
-        return ff;
+        return initFromString(s);
     }
     @Override
     public boolean equals(Object obj){

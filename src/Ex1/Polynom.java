@@ -300,6 +300,7 @@ public class Polynom implements Polynom_able{
 
 	@Override
 	public function initFromString(String s) {
+
 		return new Polynom(s);
 
 	}
