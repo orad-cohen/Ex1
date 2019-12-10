@@ -24,7 +24,7 @@ import java.util.Iterator;
 class Functions_GUITest {
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
-		int w=1000, h=600, res=200;
+		/*int w=1000, h=600, res=200;
 		Range rx = new Range(-10,10);
 		Range ry = new Range(-5,15);
 		String file = "function_file.txt";
@@ -36,7 +36,7 @@ class Functions_GUITest {
 			data.saveToFile(file2);
 			data.drawFunctions("asfasf");
 		}
-		catch(Exception e) {e.printStackTrace();}
+		catch(Exception e) {e.printStackTrace();}*/
 
 		String JSON_param_file = "GUI_params.txt";
 		//data.drawFunctions(JSON_param_file);
