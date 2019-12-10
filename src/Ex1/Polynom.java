@@ -160,8 +160,6 @@ public class Polynom implements Polynom_able{
 			p1 = (Polynom)obj;
 		}
 
-		boolean ans = true;
-
 		for(Monom value: MonomHashMap.values()){
 			try{
 				double diff = value.get_coefficient()- p1.MonomHashMap.get(value.get_power()).get_coefficient();
@@ -175,7 +173,7 @@ public class Polynom implements Polynom_able{
 				return  false; //doesnt have the same power.
 			}
 		}
-		return ans;}
+		return true;}
 
 	/**
 	 * @return

@@ -199,10 +199,17 @@ public class Monom implements function{
 			if(p1.equals(obj)){return true;}
 		}
 		if(obj instanceof Monom){
-			if(this.get_coefficient()==((Monom) obj).get_coefficient()&&
-					this.get_power()==((Monom) obj).get_power()){
+			if(this.get_power() == ((Monom) obj).get_power()) {
+				double diff = this.get_coefficient() - ((Monom) obj).get_coefficient();
+				if (Math.abs(diff) > 0.000001) {
+					return false;
+				}
 				return true;
 			}
+		}
+		if(obj instanceof ComplexFunction){
+			ComplexFunction c1 = new ComplexFunction(this);
+			if(c1.equals(obj)){return true;}
 		}
 		return false;
 			//return _coefficient==obj.coefficient&&;
