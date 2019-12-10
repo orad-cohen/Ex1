@@ -8,7 +8,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class PolynomTest  {
-    private Polynom p1,p2,p3,p4;
+    private Polynom p1,p2,p3,p4,p5;
+    private Monom m1;
 
     @BeforeEach
     void  setup() throws Exception{
@@ -16,6 +17,8 @@ class PolynomTest  {
         p2 = new Polynom("7x^2-5x^3+1x^12+8x^4");
         p3 = new Polynom("0+15x-3+15x^3+12x^4");
         p4 = new Polynom("3x^6-4+x^3-16x^4");
+        p5 = new Polynom("3x^6-4+x^3-16x^4");
+        m1 = new Monom("0");
 
     }
 
@@ -71,7 +74,8 @@ class PolynomTest  {
 
     @Test
     void testEquals() {
-
+        assertTrue(p1.equals(m1));
+        assertTrue(p4.equals(p5));
     }
 
     @Test
@@ -107,10 +111,12 @@ class PolynomTest  {
     }
 
     @Test
-    void initFromString() {//Div(Plus(Plus(3.0x^2+1.00,4.0x^5-2.00),Plus(3.0x^2+1.00,4.0x^5-2.00)),Plus(3.0x^2+1.00,4.0x^5-2.00),Div(3.0x^2+1.00,4.0x^5-2.00))
-        String s = "X^2+4x^3";
-        function f = p1.initFromString(s);
-        System.out.println(f);
+    void initFromString() {
+        String s = "2x^2+4x^5-4";
+        Polynom m = (Polynom) p1.initFromString(s);
+        p1 = new Polynom(s);
+        assertTrue(m.equals(p1));
+
     }
 
     @Test

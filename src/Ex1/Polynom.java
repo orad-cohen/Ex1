@@ -150,7 +150,7 @@ public class Polynom implements Polynom_able{
 	 * @author Orad Cohen
 	 */
 	@Override
-	public boolean equals(Object obj) {//checks via Polynom's toString method if both have the same String value
+	public boolean equals(Object obj) {
 		Polynom p1;
 		if(obj instanceof Monom){
 			p1 = new Polynom((obj.toString()));

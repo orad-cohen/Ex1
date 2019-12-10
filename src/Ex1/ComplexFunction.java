@@ -73,9 +73,6 @@ public class ComplexFunction implements complex_function{
             right = f1;
             Ope = Operation.Plus;
         }
-
-
-
     }
 
     @Override
