@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,20 +24,29 @@ public class Functions_GUI implements functions {
 
     @Override
     public void initFromFile(String file) throws IOException {
-        ComplexFunction compFunc = null;
-        String[] lines = file.split("\n");
-        for(int i = 0; i<lines.length;i++){
-            functionsArray.add(compFunc.initFromString(lines[i]));        }
+        FileReader fr = new FileReader(file);
+        BufferedReader reader = new BufferedReader(fr);
+        String line;
+        ComplexFunction compFunc = new ComplexFunction();
+        while((line = reader.readLine())!=null){
+            functionsArray.add(compFunc.initFromString(line));
+
+
+        }
+        fr.close();
+        reader.close();
 
     }
 
     @Override
     public void saveToFile(String file) throws IOException {
-        FileWriter save= new FileWriter("output.txt");
+        FileWriter save= new FileWriter(file);
         for(int i = 0; i<functionsArray.size();i++){
             save.write(functionsArray.get(i).toString()+"\n");
 
         }
+        save.flush();
+        save.close();
 
     }
 
@@ -91,35 +101,36 @@ public class Functions_GUI implements functions {
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
             }
         }
-        StdDraw.pause(60);
+        StdDraw.pause(1);
 
     }
 
     @Override
     public void drawFunctions(String json_file)  {
-        Object obj = null;
+        Object obj;
         try{
             JSONParser jp = new JSONParser();
             FileReader fr = new FileReader(json_file);
             obj = jp.parse(fr);
+            JSONObject jo = (JSONObject) obj;
+            JSONArray ry = (JSONArray) jo.get("Range_Y");
+            JSONArray rx = (JSONArray) jo.get("Range_X");
+            int width = Integer.parseInt(jo.get("Width").toString());
+            int height = Integer.parseInt(jo.get("Height").toString());
+            int res = Integer.parseInt(jo.get("Resolution").toString());
+            double y1 = Double.parseDouble(ry.get(0).toString());
+            double y2 = Double.parseDouble(ry.get(1).toString());
+            double x1 = Double.parseDouble(rx.get(0).toString());
+            double x2 = Double.parseDouble(rx.get(1).toString());
+            Range yy = new Range(y1, y2);
+            Range xx = new Range(x1, x2);
+            drawFunctions(width, height, xx, yy, res);
 
         }
         catch (Exception e){
             drawFunctions("GUI_params.txt");
         }
-        JSONObject jo = (JSONObject) obj;
-        JSONArray ry = (JSONArray) jo.get("Range_Y");
-        JSONArray rx = (JSONArray) jo.get("Range_X");
-        int width = Integer.parseInt(jo.get("Width").toString());
-        int height = Integer.parseInt(jo.get("Height").toString());
-        int res = Integer.parseInt(jo.get("Resolution").toString());
-        double y1 = Double.parseDouble(ry.get(0).toString());
-        double y2 = Double.parseDouble(ry.get(1).toString());
-        double x1 = Double.parseDouble(rx.get(0).toString());
-        double x2 = Double.parseDouble(rx.get(1).toString());
-        Range yy = new Range(y1, y2);
-        Range xx = new Range(x1, x2);
-        drawFunctions(width, height, xx, yy, res);
+
     }
 
     public function get(int index){
