@@ -25,7 +25,6 @@ public class ComplexFunction implements complex_function{
     }
 
     public ComplexFunction(Operation Oper, Object obj1, Object obj2) {
-
         left = (function)obj1;
         right = (function)obj2;
         Ope = Oper;
@@ -33,11 +32,9 @@ public class ComplexFunction implements complex_function{
         }
 
     public ComplexFunction(String Oper, Object obj1, Object obj2) {
-
             left = (function)obj1;
             right = (function)obj2;
             Ope = StringOp(Oper);
-
     }
 
     public Operation StringOp(String Ope){
@@ -200,8 +197,41 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function initFromString(String s) {
-        function ff = p1.initFromString(s);
-        return ff    ;}
+        if(!s.endsWith(")")){
+            return new Polynom(s);
+        }
+        s = s.toLowerCase().replace(" ","");
+        int[] OpeArray = {s.indexOf("plus"), s.indexOf("mul"),s.indexOf("div"),s.indexOf("max"),s.indexOf("min")};
+        int first=0;
+        for(int i = 0;i<OpeArray.length;i++){
+            if (first>OpeArray[i]&&OpeArray[i]!=-1){
+                first = OpeArray[i];
+            }
+        }
+
+
+        int counter = 1;
+        int bra1 = s.indexOf('(');
+        int bra2 = s.lastIndexOf(')');
+        String ope = (s.substring(first,bra1));
+        int c =0;
+        for(int x = bra1+1; x<s.length()&&counter!=0;x++){
+            if(s.charAt(x)==','){
+                counter--;}
+            else if(s.charAt(x)=='('){
+                counter++;
+            }
+            c=x;
+        }
+
+        if(s.length()>=0&&s.indexOf(")")==s.length()-1){
+            function f1 =new Polynom(s.substring(bra1+1,c));
+            function f2 =new Polynom(s.substring(c+1,bra2 ));
+            return new ComplexFunction(ope,f1,f2);
+        }
+        else{
+            return new ComplexFunction(ope,initFromString(s.substring(bra1+1,c )),initFromString(s.substring(c+1,bra2)));
+        }}
 
     @Override
     public function copy() {

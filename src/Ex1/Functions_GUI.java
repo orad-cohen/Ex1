@@ -53,13 +53,34 @@ public class Functions_GUI implements functions {
             x[i] = x0;
             for(int a=0;a<size;a++) {
 
-
                 yy[a][i] = functionsArray.get(a).f(x[i]);
             }
             x0+=x_step;
         }
         StdDraw.setXscale(rx.get_min(), rx.get_max());
         StdDraw.setYscale(ry.get_min(), ry.get_max());
+        int x1 = (int)rx.get_min();
+        int y1 = (int)ry.get_min();
+        Font font = new Font(StdDraw.getFont().toString(), Font.BOLD, 14 );
+        StdDraw.setFont(font);
+        for(int p = x1; p<rx.get_max();p++){
+            StdDraw.setPenColor(Color.gray);
+            StdDraw.line(p,ry.get_min(),p,ry.get_max());
+            StdDraw.setPenColor(Color.black);
+            if(p==0){continue;}
+            StdDraw.text(p, 0.3, ""+p);
+        }
+        for(int p = y1; p<ry.get_max();p++){
+            StdDraw.setPenColor(Color.gray);
+            StdDraw.line(rx.get_min(), p,rx.get_max() ,p );
+            StdDraw.setPenColor(Color.black);
+            StdDraw.text(0.3, p+0.1, ""+p);
+        }
+        StdDraw.setPenColor(Color.black);
+        StdDraw.setPenRadius(0.004);
+        StdDraw.line(0, ry.get_min(), 0,ry.get_max());
+        StdDraw.line(rx.get_min(), 0, ry.get_max(), 0);
+        StdDraw.setPenRadius();
         for(int a=0;a<size;a++) {
             int c = a%Colors.length;
             StdDraw.setPenColor(Colors[c]);
@@ -70,6 +91,7 @@ public class Functions_GUI implements functions {
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
             }
         }
+        StdDraw.pause(60);
 
     }
 
