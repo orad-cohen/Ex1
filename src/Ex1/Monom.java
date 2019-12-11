@@ -71,7 +71,11 @@ public class Monom implements function{
 			int i0 = s.indexOf("x");
 			int i2 = s.indexOf("-x");
 			int i3 = s.indexOf("x^");
+			int i4 = s.indexOf("+x");
 			if(i2>=0) {Co=-1;}
+			else if(i4>=0){
+				Co=1;
+			}
 			else {
 				if(i0>0) {
 					Co = Double.parseDouble(s.substring(0,i0));
@@ -174,8 +178,8 @@ public class Monom implements function{
 
 		}
 	public static double roundAvoid(double value) {//round a double to the 7th number after decimal
-			return value;}
-			/*String Dou = ""+value;
+
+			String Dou = ""+value;
 			int Dec = Dou.indexOf('.')+8;
 
 			if(Dec>=Dou.length()){return Double.parseDouble(Dou);}
@@ -184,7 +188,7 @@ public class Monom implements function{
 
 
 
-	}*/
+	}
 	public function initFromString(String s){
 
 		return new Monom(s);

@@ -1,11 +1,11 @@
 package Ex1Testing;
 
-import Ex1.*;
-
+import Ex1.Monom;
+import Ex1.Polynom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PolynomTest  {
     private Polynom p1,p2,p3,p4,p5;
@@ -14,68 +14,79 @@ class PolynomTest  {
     @BeforeEach
     void  setup() throws Exception{
         p1 = new Polynom();
-        p2 = new Polynom("7x^2-5x^3+1x^12+8x^4");
-        p3 = new Polynom("0+15x-3+15x^3+12x^4");
-        p4 = new Polynom("3x^6-4+x^3-16x^4");
-        p5 = new Polynom("3x^6-4+x^3-16x^4");
+        p2 = new Polynom("4x^2+3x^3");
+        p3 = new Polynom("6-x+6x^2");
+        p4 = new Polynom("3x^4+2x^2");
+        p5 = new Polynom("x^6+x^5");
         m1 = new Monom("0");
 
     }
 
     @Test
     void f() {
-        assertEquals(3380292.383,p2.f(3.5),0.001);
-        assertEquals(p3.f(0),-3);
-        assertEquals(p4.f(1),-16);
+        assertEquals(40,p2.f(2));
+        assertEquals(6,p3.f(0));
+        assertEquals(5,p4.f(1));
 
     }
 
     @Test
-    void add() { //Monoms
-        String[] monoms = {"1","x","x^2", "0.5x^2","5", "1.7x","3.2x^2","-3","-1.5x^2","2", "-x","-3.2x^2","4","-1.5x^2","3x^14"};
+    void testMonomAdd() { //Monoms
+        String[] monoms = {"0","4x","-2x","3","5x^5","5x^5"};
         for(int i=0;i<monoms.length;i++) {
             Monom m = new Monom(monoms[i]);
             p1.add(m);}
-        assertEquals(p1,new Polynom("3x^14-2x^2+1.7x^1+9"));
+        assertEquals(p1,new Polynom("10x^5+2x+3"));
     }
 
     @Test
-    void testAdd() {//Polynoms
+    void testPolyAdd() {//Polynoms
         p2.add(p3);
         p4.add(p3);
-        assertEquals(p2,new Polynom("7x^2+10x^3+15x-3+20x^4+x^12"));
-        assertEquals(p4,new Polynom("3x^6-7+16x^3-4x^4+15x"));
+        p1 = new Polynom("10x^2+3x^3-x+6");
+        assertTrue(p2.equals(p1));
     }
 
     @Test
     void substract() {
         p3.substract(p3);
-        p4.substract(p2);
         assertEquals(p3.toString(),"0");
-        assertEquals(p4, new Polynom("-24x^4-x^12+6x^3+3x^6-7x^2-4"));
+        p4.substract(p2);
+        assertTrue(p4.equals(new Polynom("3x^4-3x^3-2x^2")));
     }
 
     @Test
     void multiply() {// Multiply by monom
-        Monom m1 = new Monom("-3.2x^2");
+        m1 = new Monom("-3.2x^2");
         p3.multiply(m1);
+        assertEquals(p3,new Polynom("-19.2x^2+3.2x^3-19.2x^4"));
+
+        p1 = (Polynom) p4.copy();
+        assertNotSame(p1,p4);
+        p4.multiply(new Monom("1"));
+        assertTrue(p4.equals(p1));
         p4.multiply(new Monom("0"));
-        assertEquals(p3,new Polynom("-48x^3+9.6x^2-48x^5-38.4x^6"));
         assertEquals(p4,new Polynom("0"));
+
     }
 
     @Test
     void testMultiply() {// Multiply by polynom
-        p2.multiply(p3);
-        p3.multiply(p4);
-        assertEquals(p2,new Polynom("12.0x^16+15.0x^15+15.0x^13-3.0x^12+96.0x^8+60.0x^7+9.0x^6+225.0x^5-99.0x^4+120.0x^3-21.0x^2"));
-        assertEquals(p3,new Polynom("36.0x^10+45.0x^9-192.0x^8-183.0x^7+6.0x^6-240.0x^5+15.0x^4-63.0x^3-60.0x^1+12.00"));
+        p2.multiply(p3);//(4x^2+3x^3)*(6x^2+6-x) = 24x^4+24x^2-4x^3+18x^5+18x^3-3x^4
+        p3.multiply(p4);//(6x^2+6-x)*(3x^4+2x^2) = 18x^6+12x^4+18x^4+12x^2-3x^5-2x^3
+        assertEquals(p2,new Polynom("24x^4+24x^2-4x^3+18x^5+18x^3-3x^4"));
+        assertEquals(p3,new Polynom("18x^6+12x^4+18x^4+12x^2-3x^5-2x^3"));
     }
 
     @Test
     void testEquals() {
         assertTrue(p1.equals(m1));
-        assertTrue(p4.equals(p5));
+        p1 = (Polynom) p4.copy();
+        assertTrue(p4.equals(p1));
+        assertNotSame(p1,p4);
+        p4.add(new Monom("x"));
+        p4.substract(new Polynom("x"));
+        assertTrue(p4.equals(p1));
     }
 
     @Test
@@ -90,6 +101,9 @@ class PolynomTest  {
 
     @Test
     void copy() {
+        p1 = (Polynom) p4.copy();
+        assertTrue(p4.equals(p1));
+        assertNotSame(p1,p4);
     }
 
     @Test
