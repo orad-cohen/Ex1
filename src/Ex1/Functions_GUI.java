@@ -21,7 +21,6 @@ public class Functions_GUI implements functions {
 
 
 
-
     @Override
     public void initFromFile(String file) throws IOException {
         FileReader fr = new FileReader(file);
@@ -101,7 +100,9 @@ public class Functions_GUI implements functions {
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
             }
         }
-        StdDraw.pause(1);
+
+
+
 
     }
 

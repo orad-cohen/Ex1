@@ -5,6 +5,8 @@ import Ex1.Polynom;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PolynomTest  {
@@ -96,7 +98,17 @@ class PolynomTest  {
 
     @Test
     void root() {
-        double[][] res = {{0,0.2135},{0,0.83334},{2.404,0.9999}};
+        double root;
+        double eps = 0.00001;
+        p1 = new Polynom("x");
+        root = p1.root(-100,100,eps);
+        assertTrue(0 <= Math.abs(p1.f(root)) && Math.abs(p1.f(root)) <= eps);
+        p1 = new Polynom("x^2-x-12");
+        root = p1.root(-100,100,eps);
+        assertTrue(0 <= Math.abs(p1.f(root)) && Math.abs(p1.f(root)) <= eps);
+        p1 = new Polynom("x^5 - 2x^3 - 2");
+        root = p1.root(-100,100,eps);
+        assertTrue(0 <= Math.abs(p1.f(root)) && Math.abs(p1.f(root)) <= eps);
     }
 
     @Test
@@ -108,20 +120,38 @@ class PolynomTest  {
 
     @Test
     void derivative() {
+        p1 = new Polynom("4x^4+2x^2-x+4");//before
+        p2 = new Polynom("16x^3+4x-1");//after
+        assertTrue(p1.derivative().equals(p2));
     }
 
     @Test
     void area() {
+        double area;
+        area = p4.area(1,3,0.0001);
+        System.out.println(area);
+        area = p1.area(1,2,0.0001);//Polynom 0
+        System.out.println(area);
+        p1 = new Polynom("2");
+        area = p1.area(0,3,0.0001);//Polynom 0
+        System.out.println(area);
     }
 
     @Test
     void iteretor() {
+        Iterator<Monom> ite = p3.iteretor();
+
+        while(ite.hasNext()){
+            System.out.println(ite.next().toString());
+        }
+
     }
-
-
 
     @Test
     void testToString() {
+        System.out.println(p1.toString());
+        System.out.println(p3.toString());
+        System.out.println(p4.toString());
     }
 
     @Test
@@ -135,5 +165,7 @@ class PolynomTest  {
 
     @Test
     void sortbykey() {
+        p1 = new Polynom("6-x^3+7x^2");
+        System.out.println(p1.toString());
     }
 }

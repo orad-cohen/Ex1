@@ -163,8 +163,10 @@ public class ComplexFunction implements complex_function{
                 return left.f(x)+right.f(x);
 
             case Div:
-                if(right.f(x)==0){
-                    return Double.POSITIVE_INFINITY;
+                Double pinf = 1.0/0.0;
+                Double ninf = -1.0/0.0;
+                if(left.f(x)==pinf||right.f(x)==pinf||left.f(x)==ninf||right.f(x)==ninf){
+                    return pinf;
                 }
                 return left.f(x)/right.f(x);
             case Mul:

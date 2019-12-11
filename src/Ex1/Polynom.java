@@ -1,9 +1,6 @@
 package Ex1;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * This class represents a Polynom with add, multiply functionality, it also should support the following:
@@ -237,12 +234,12 @@ public class Polynom implements Polynom_able{
 	public double area(double x0, double x1, double eps) {//done with no recursions since space wise it cannot support eps
 		double ans = 0;
 
-		if(x0 > x1) {// if x0 is bigger then x1 then ans would be returned as 0 (with been told to do so for this project)
+		if(x0 > x1) {// if x0 is bigger then x1 then ans would be returned as 0 (we've been told to do so for this project)
 			return ans;
 		}
-		while(x0 < x1) {//divide [x0,x1] to many rectangles with width of eps and sum all of their areas together
+		while(x0 <= x1) {//divide [x0,x1] to many rectangles with width of eps and sum all of their areas together
 			if(this.f(x0) >= 0) {//checks if the area is in the positive half of the graph
-				ans = ans + (this.f(x0) * eps);//return only the positive area's sum (with been told to do so for this project)
+				ans = ans + (this.f(x0) * eps);//return only the positive area's sum (we've been told to do so for this project)
 			}
 			x0 = x0 + eps;
 		}
@@ -255,7 +252,12 @@ public class Polynom implements Polynom_able{
 	 */
 	@Override
 	public Iterator<Monom> iteretor() {//return an iterator pf the Polynom's HashMap
-		return (Iterator<Monom>) MonomHashMap;}
+		ArrayList<Monom> ite = new ArrayList<>();
+		for(Monom value : MonomHashMap.values()){//iterates through Polynom's HashMap values
+			ite.add(value);//then adds it to the new ans Polynom
+		}
+
+		return ite.iterator();}
 
 	/**
 	 *

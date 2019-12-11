@@ -33,9 +33,9 @@ class MonomTest {
         m2 = new Monom("3x^2");
         m3 = new Monom("6x");
         m4 = new Monom("0");
-        assertEquals(m2.derivative().toString(), m3.toString());
-        assertEquals("0",m1.derivative().toString());
-        assertEquals(m4.derivative().toString(),"0");
+        assertTrue(m2.derivative().equals(m3));
+        assertTrue(m1.derivative().equals(m4));
+
 
     }
     @Test

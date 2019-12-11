@@ -40,6 +40,7 @@ class Functions_GUITest {
 		
 		String JSON_param_file = "GUI_params.txt";
 		data.drawFunctions(JSON_param_file);
+
 	}
 	private functions _data=null;
 //	@BeforeAll
@@ -51,17 +52,31 @@ class Functions_GUITest {
 		_data = FunctionsFactory();
 	}
 
-	//@Test
+	@Test
 	void testFunctions_GUI() {
 	//	fail("Not yet implemented");
 	}
 
-	//@Test
-	void testInitFromFile() {
-	//	fail("Not yet implemented");
+	@Test
+	public void static testInitFromFile() {
+		Functions_GUI fx = new Functions_GUI();
+		ComplexFunction comF = new ComplexFunction();
+		function cw = comF.initFromString("x^3-3x^2-2x+1");
+		fx.add(cw);
+		fx.drawFunctions("asfas");
+		Polynom p1 = new Polynom("x^3-3x^2-2x+1");
+		fx.add(p1);
+		fx.drawFunctions("423423");
+
+		System.out.println(cw.f(4));
+		fx.add(cw);
+		Range yy = new Range(-10,10);
+		Range xx = new Range(-10,10);
+		fx.drawFunctions(1000,1000,xx,yy,160);
+
 	}
 
-	//@Test
+	@Test
 	void testSaveToFile() {
 		
 		
