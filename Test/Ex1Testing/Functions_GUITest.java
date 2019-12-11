@@ -58,7 +58,7 @@ class Functions_GUITest {
 	}
 
 	@Test
-	public void static testInitFromFile() {
+	void testInitFromFile() {
 		Functions_GUI fx = new Functions_GUI();
 		ComplexFunction comF = new ComplexFunction();
 		function cw = comF.initFromString("x^3-3x^2-2x+1");
