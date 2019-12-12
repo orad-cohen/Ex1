@@ -5,7 +5,7 @@ public class ComplexFunction implements complex_function{
     private function left,right;
     private Operation Ope= Operation.None;
     private Polynom p1 = new Polynom();
-
+    //Constructors.
     public ComplexFunction(){
         left = new Polynom("0");
         right = left.copy();
@@ -40,7 +40,7 @@ public class ComplexFunction implements complex_function{
             right = (function)obj2;
             Ope = StringOp(Oper);
     }
-
+    //helper function for getting Operation Enum from string.
     public Operation StringOp(String Ope){
         switch (Ope) {
             case "plus":
@@ -157,7 +157,7 @@ public class ComplexFunction implements complex_function{
     }
 
     @Override
-    public double f(double x) {
+    public double f(double x) {//returns a function value at certain x.
         switch (getOp()){
             case Plus:
                 return left.f(x)+right.f(x);
@@ -165,9 +165,13 @@ public class ComplexFunction implements complex_function{
             case Div:
                 Double pinf = 1.0/0.0;
                 Double ninf = -1.0/0.0;
-                if(left.f(x)==pinf||right.f(x)==pinf||left.f(x)==ninf||right.f(x)==ninf){
+                if(left.f(x)==pinf||right.f(x)==pinf){//takes care of deviding by zero end-point/
                     return pinf;
                 }
+                else if (left.f(x)==ninf||right.f(x)==ninf){
+                    return  ninf;
+
+            }
                 return left.f(x)/right.f(x);
             case Mul:
                 return left.f(x)*right.f(x);
@@ -203,7 +207,7 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function initFromString(String s) {
-        if(!s.endsWith(")")){
+        if(!s.endsWith(")")){//Stopping condition in case we arrived to a function that is not a complex one.
             return new Polynom(s);
         }
         s = s.toLowerCase().replace(" ","");
@@ -214,14 +218,12 @@ public class ComplexFunction implements complex_function{
                 first = OpeArray[i];
             }
         }
-
-
         int counter = 1;
         int bra1 = s.indexOf('(');
         int bra2 = s.lastIndexOf(')');
         String ope = (s.substring(first,bra1));
         int c =0;
-        for(int x = bra1+1; x<s.length()&&counter!=0;x++){
+        for(int x = bra1+1; x<s.length()&&counter!=0;x++){//find out the comma that separates our two functions.
             if(s.charAt(x)==','){
                 counter--;}
             else if(s.charAt(x)=='('){
@@ -230,7 +232,7 @@ public class ComplexFunction implements complex_function{
             c=x;
         }
 
-        if(s.length()>=0&&s.indexOf(")")==s.length()-1){
+        if(s.length()>=0&&s.indexOf(")")==s.length()-1){//Stopping condition in case we arrive to a complex function without nested complex functions.
             function f1 =new Polynom(s.substring(bra1+1,c));
             function f2 =new Polynom(s.substring(c+1,bra2 ));
             return new ComplexFunction(ope,f1,f2);
@@ -240,14 +242,14 @@ public class ComplexFunction implements complex_function{
         }}
 
     @Override
-    public function copy() {
+    public function copy() {//uses the init form string to make hard copy.
         String s = toString();
         return initFromString(s);
     }
     @Override
-    public boolean equals(Object obj){
+    public boolean equals(Object obj){//checks 400 points to check if equals.
         ComplexFunction cf = new ComplexFunction(obj);
-        for(int x =-100;x<=200;x++){
+        for(double x =-100;x<=100;x+=0.5){
             if(f(x)!=cf.f(x)){
                 return false;
             }}

@@ -1,4 +1,3 @@
-
 package Ex1;
 
 import java.util.Comparator;
@@ -33,14 +32,14 @@ public class Monom implements function{
 		set_coefficient(0);
 		set_power(0);
 	}
-	
+
 	public double get_coefficient() {
 		return roundAvoid(this._coefficient);
 	}
 	public int get_power() {
 		return this._power;
 	}
-	/** 
+	/**
 	 * this method returns the derivative monom of this.
 	 * @return
 	 */
@@ -57,7 +56,7 @@ public class Monom implements function{
 	public boolean isZero() {return this.get_coefficient() == 0;}
 
 
-	// ***************** add your code below **********************
+	// ****** add your code below *********
 	/**
 	 * @param s
 	 * @author Orad Cohen
@@ -110,32 +109,32 @@ public class Monom implements function{
 
 
 
-		}
+	}
 
 	/**
 	 * @param m
 	 * @author Orad Cohen
 	 */
-		public void add (Monom m){
-			double x = this.get_coefficient();
-			double y= m.get_coefficient();
+	public void add (Monom m){
+		double x = this.get_coefficient();
+		double y= m.get_coefficient();
 		set_coefficient(x+y);
 
-		}//add the coefficients.
+	}//add the coefficients.
 
 
 	/**
 	 * @param d
 	 * @author Orad Cohen
 	 */
-		public void multiply (Monom d){//add the power and multiply the coefficien
-			set_coefficient(get_coefficient()*d.get_coefficient());
-			if(get_coefficient()==0){
-				set_power(0);
-			}
-			else{
-				set_power(get_power()+d.get_power());}
-			}
+	public void multiply (Monom d){//add the power and multiply the coefficien
+		set_coefficient(get_coefficient()*d.get_coefficient());
+		if(get_coefficient()==0){
+			set_power(0);
+		}
+		else{
+			set_power(get_power()+d.get_power());}
+	}
 
 
 
@@ -144,47 +143,47 @@ public class Monom implements function{
 	 * @return
 	 * @author Orad Cohen
 	 */
-		public String toString () {
-			String Var;
-			String Coe;
-			Var = get_power() == 0 ? "" : "x^";
-			Coe = get_coefficient() == 0 ? "" : ""+roundAvoid(get_coefficient());
+	public String toString () {
+		String Var;
+		String Coe;
+		Var = get_power() == 0 ? "" : "x^";
+		Coe = get_coefficient() == 0 ? "" : ""+roundAvoid(get_coefficient());
 
-			String ans = Coe + Var + this.get_power();
-			return ans;
-		}
-		void set_coefficient(String s){
-			try {
-				if (s.length() == 1) {
-					if (s.charAt(0) == '-') {
-						set_coefficient(-1);
-					} else if (s.charAt(0) == '+') {
-						set_coefficient(1);
-					} else {
-						set_coefficient(Double.parseDouble(s));
-					}
+		String ans = Coe + Var + this.get_power();
+		return ans;
+	}
+	void set_coefficient(String s){
+		try {
+			if (s.length() == 1) {
+				if (s.charAt(0) == '-') {
+					set_coefficient(-1);
+				} else if (s.charAt(0) == '+') {
+					set_coefficient(1);
 				} else {
-					set_coefficient(Double.parseDouble(s));}}
-			catch (Exception e){
-				System.out.println("Err, Coefficient not found, or Incorrect input");
-			}
-
-					}
-		void set_power(String s){
-			try{set_power(Integer.parseInt(s));}
-			catch (Exception e){
-				System.out.println(e.toString());
-			}
-
+					set_coefficient(Double.parseDouble(s));
+				}
+			} else {
+				set_coefficient(Double.parseDouble(s));}}
+		catch (Exception e){
+			System.out.println("Err, Coefficient not found, or Incorrect input");
 		}
+
+	}
+	void set_power(String s){
+		try{set_power(Integer.parseInt(s));}
+		catch (Exception e){
+			System.out.println(e.toString());
+		}
+
+	}
 	public static double roundAvoid(double value) {//round a double to the 7th number after decimal
 
-			String Dou = ""+value;
-			int Dec = Dou.indexOf('.')+8;
+		String Dou = ""+value;
+		int Dec = Dou.indexOf('.')+8;
 
-			if(Dec>=Dou.length()){return Double.parseDouble(Dou);}
-			else{
-				return Double.parseDouble(Dou.substring(0, Dec));}
+		if(Dec>=Dou.length()){return Double.parseDouble(Dou);}
+		else{
+			return Double.parseDouble(Dou.substring(0, Dec));}
 
 
 
@@ -220,30 +219,30 @@ public class Monom implements function{
 			return c1.equals(obj);
 		}
 		return false;
-			//return _coefficient==obj.coefficient&&;
+		//return _coefficient==obj.coefficient&&;
 	}
 
 
 
-		// you may (always) add other methods.
+	// you may (always) add other methods.
 
-		//****************** Private Methods and Data *****************
-
-
-		private void set_coefficient ( double a){
-			this._coefficient = a;
-		}
-		private void set_power ( int p){
-			if (p < 0) {
-				throw new RuntimeException("ERR the power of Monom should not be negative, got: " + p);
-			}
-			this._power = p;
-		}
-		private static Monom getNewZeroMonom () {
-			return new Monom(ZERO);
-		}
-		private double _coefficient;
-		private int _power;
+	//****** Private Methods and Data *******
 
 
+	private void set_coefficient ( double a){
+		this._coefficient = a;
 	}
+	private void set_power ( int p){
+		if (p < 0) {
+			throw new RuntimeException("ERR the power of Monom should not be negative, got: " + p);
+		}
+		this._power = p;
+	}
+	private static Monom getNewZeroMonom () {
+		return new Monom(ZERO);
+	}
+	private double _coefficient;
+	private int _power;
+
+
+}

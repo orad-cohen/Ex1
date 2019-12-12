@@ -29,8 +29,6 @@ public class Functions_GUI implements functions {
         ComplexFunction compFunc = new ComplexFunction();
         while((line = reader.readLine())!=null){
             functionsArray.add(compFunc.initFromString(line));
-
-
         }
         fr.close();
         reader.close();
@@ -68,6 +66,7 @@ public class Functions_GUI implements functions {
         }
         StdDraw.setXscale(rx.get_min(), rx.get_max());
         StdDraw.setYscale(ry.get_min(), ry.get_max());
+        //Draw grid and xy axis.
         int x1 = (int)rx.get_min();
         int y1 = (int)ry.get_min();
         Font font = new Font(StdDraw.getFont().toString(), Font.BOLD, 14 );
@@ -90,6 +89,7 @@ public class Functions_GUI implements functions {
         StdDraw.line(0, ry.get_min(), 0,ry.get_max());
         StdDraw.line(rx.get_min(), 0, ry.get_max(), 0);
         StdDraw.setPenRadius();
+        //Draw the functions.
         for(int a=0;a<size;a++) {
             int c = a%Colors.length;
             StdDraw.setPenColor(Colors[c]);
@@ -107,7 +107,7 @@ public class Functions_GUI implements functions {
     }
 
     @Override
-    public void drawFunctions(String json_file)  {
+    public void drawFunctions(String json_file)  {//reads from json file, if doesnt exist, read from default gui param.
         Object obj;
         try{
             JSONParser jp = new JSONParser();
