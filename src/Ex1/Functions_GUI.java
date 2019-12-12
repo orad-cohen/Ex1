@@ -52,12 +52,13 @@ public class Functions_GUI implements functions {
     @Override
     public void drawFunctions(int width, int height, Range rx, Range ry, int resolution) {
         int n = resolution;
-        StdDraw.setCanvasSize(width, height);
+        StdDraw.setCanvasSize(width, height);//starts the drawing.
         int size = functionsArray.size();
         double[] x = new double[n+1];
         double[][] yy = new double[size][n+1];
         double x_step = (rx.get_max()-rx.get_min())/n;
         double x0 = rx.get_min();
+        //Create the array of values
         for (int i=0; i<=n; i++) {
             x[i] = x0;
             for(int a=0;a<size;a++) {
