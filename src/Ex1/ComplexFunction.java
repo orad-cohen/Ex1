@@ -3,7 +3,7 @@ package Ex1;
 public class ComplexFunction implements complex_function{
 
     private function left,right;
-    private Operation Ope;
+    private Operation Ope= Operation.None;
     private Polynom p1 = new Polynom();
     //Constructors.
     public ComplexFunction(){
@@ -19,11 +19,11 @@ public class ComplexFunction implements complex_function{
         }
         else if (obj1 instanceof Monom){
             left = new Monom(obj1.toString());
-
+            Ope =Operation.None;
         }
         else{
             left = (function)obj1;
-
+            Ope = Operation.None;
         }
 
     }
