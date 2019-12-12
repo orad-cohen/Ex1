@@ -81,7 +81,7 @@ class Functions_GUITest {
 
 		Range yy = new Range(-10,10);
 		Range xx = new Range(-10,10);
-		x.drawFunctions(1000,1000,xx,yy,150);
+		x.drawFunctions(1000,600,xx,yy,150);
 	}
 
 	@Test
