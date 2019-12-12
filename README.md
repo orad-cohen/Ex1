@@ -22,6 +22,8 @@ For Complex function, we had trouble understanding how to store the functions. B
 
 For Function\_Gui we have stored the function in ArrayList, since the order doesn&#39;t matter, we used STDDraw to draw functions, since it was provided with the assignment and it&#39;s a comfortable library to work with.
 
+see more in Issues and wiki.
+
 **Testing:**
 
 We use Junit library to test our functions, since it was our first time it took a while at first to do, tests exmaples are found in our [Wiki.](https://github.com/orad-cohen/Ex1/wiki)
