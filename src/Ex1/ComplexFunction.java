@@ -207,6 +207,9 @@ public class ComplexFunction implements complex_function{
 
     @Override
     public function initFromString(String s) {
+        if(s.indexOf("f(x)=")>=0){
+            return initFromString(s.substring(s.indexOf("f(x)=")+5));
+        }
         if(!s.endsWith(")")){//Stopping condition in case we arrived to a function that is not a complex one.
             return new Polynom(s);
         }
