@@ -4,7 +4,12 @@ import Ex1.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.Iterator;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 /**
  * Note: minor changes (thanks to Amichai!!)
  * The use of "get" was replaced by iterator!
@@ -22,6 +27,8 @@ import java.util.Iterator;
  *
  */
 class Functions_GUITest {
+
+
 	public static void main(String[] a) {
 		functions data = FunctionsFactory();
 	//	int w=1000, h=600, res=200;
@@ -49,50 +56,86 @@ class Functions_GUITest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		_data = FunctionsFactory();
+
 	}
 
 	@Test
 	void testFunctions_GUI() {
-	//	fail("Not yet implemented");
-	}
+		Functions_GUI x = new Functions_GUI();
+		Monom m1 = new Monom("x");
+		x.add(m1);
+		Polynom p1 = new Polynom("x^2-x-12");
+		x.add(p1);
+		Polynom p2 = new Polynom("2x^2+3x+5");
+		x.add(p2);
+		ComplexFunction c1 = new ComplexFunction("div",p2,p1);
+		x.add(c1);
+		ComplexFunction c2 = new ComplexFunction("plus",c1,c1);
+		x.add(c2);
+		ComplexFunction c3 = new ComplexFunction("div",new Monom("1"),new Polynom("x-1"));
+		x.add(c3);
+		ComplexFunction c4 = new ComplexFunction("div",new Monom("2"),new Polynom("x^2-x"));
+		x.add(c4);
+		ComplexFunction c5 = new ComplexFunction("div",new Polynom("x+3"),new Polynom("x-1"));
+		x.add(c5);
 
-	@Test
-	void testInitFromFile() {
-		Functions_GUI fx = new Functions_GUI();
-		ComplexFunction comF = new ComplexFunction();
-		function cw = comF.initFromString("x^3-3x^2-2x+1");
-		fx.add(cw);
-		fx.drawFunctions("asfas");
-		Polynom p1 = new Polynom("x^3-3x^2-2x+1");
-		fx.add(p1);
-		fx.drawFunctions("423423");
-
-		System.out.println(cw.f(4));
-		fx.add(cw);
 		Range yy = new Range(-10,10);
 		Range xx = new Range(-10,10);
-		fx.drawFunctions(1000,1000,xx,yy,160);
-
+		x.drawFunctions(1000,1000,xx,yy,150);
 	}
 
 	@Test
-	void testSaveToFile() {
-		
-		
+	void testAdd() {
+		Functions_GUI x = new Functions_GUI();
+		ComplexFunction c = new ComplexFunction(new Monom("x"));
+		assertTrue(x.isEmpty());
+		assertTrue(x.add(c));
+		assertTrue(x.add(c));
+		assertEquals(x.size(),2);
 	}
 
-	//@Test
+	@Test
+	void testSaveReadFile() {
+		Functions_GUI giver = new Functions_GUI();
+		Functions_GUI reciver = new Functions_GUI();
+		Monom m = new Monom("2x^3");
+		ComplexFunction c = new ComplexFunction("plus",m,m);
+		giver.add(c);
+		try {
+			giver.saveToFile("Testfile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			reciver.initFromFile("Testfile");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Range yy = new Range(-10,10);
+		Range xx = new Range(-10,10);
+		reciver.drawFunctions(1000,1000,xx,yy,160);
+	}
+
+	@Test
 	void testDrawFunctions() {
-		//_data.drawFunctions();
-	//	fail("Not yet implemented");
+		Functions_GUI x = new Functions_GUI();
+		ComplexFunction c1 = new ComplexFunction("div",new Polynom("x^3+2"),new Monom("x"));
+		ComplexFunction c2 = new ComplexFunction("plus",c1,new Polynom("7x^3-3x"));
+		ComplexFunction c3 = new ComplexFunction("mul",new Polynom("x^3+2"),new Monom("x^2"));
+		ComplexFunction c4 = new ComplexFunction("max",c3,c1);
+		x.add(c1);
+		x.add(c1);
+		x.add(c2);
+		x.add(c3);
+		x.add(c4);
+		Range yy = new Range(-10,10);
+		Range xx = new Range(-10,10);
+		x.drawFunctions(500,500,xx,yy,100);
+		x.drawFunctions("NotHereLol.txt");//test default
+		x.drawFunctions("GUI_params.txt");
 	}
 
-	@Test
-	void testDrawFunctionsIntIntRangeRangeInt() {
-		_data.drawFunctions("GUI_params.txt");
-		//fail("Not yet implemented");
-	}
 	public static functions FunctionsFactory() {
 		functions ans = new Functions_GUI();
 		String s1 = "3.1 +2.4x^2 -x^4";

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.Iterator;
 
 public class Functions_GUI implements functions {
-    ArrayList<function> functionsArray = new ArrayList<function>();
+    private ArrayList<function> functionsArray = new ArrayList<function>();
     public static Color[] Colors = {Color.blue, Color.cyan, Color.MAGENTA, Color.ORANGE,
             Color.red, Color.GREEN, Color.PINK};
 
@@ -23,6 +23,8 @@ public class Functions_GUI implements functions {
 
     @Override
     public void initFromFile(String file) throws IOException {
+        ArrayList<function> fx = new ArrayList<>();
+        functionsArray = fx;
         FileReader fr = new FileReader(file);
         BufferedReader reader = new BufferedReader(fr);
         String line;
@@ -94,7 +96,7 @@ public class Functions_GUI implements functions {
             int c = a%Colors.length;
             StdDraw.setPenColor(Colors[c]);
 
-            System.out.println(a+") "+Colors[a]+"  f(x)= "+functionsArray.get(a));
+            System.out.println(a+") "+Colors[c]+"  f(x)= "+functionsArray.get(a));
             for (int i = 0; i < n; i++) {
 
                 StdDraw.line(x[i], yy[a][i], x[i+1], yy[a][i+1]);
@@ -129,7 +131,9 @@ public class Functions_GUI implements functions {
 
         }
         catch (Exception e){
-            drawFunctions("GUI_params.txt");
+            Range ry = new Range(-5,15);
+            Range rx = new Range(-10,10);
+            drawFunctions(1000,600,rx,ry,200);
         }
 
     }

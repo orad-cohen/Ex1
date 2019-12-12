@@ -3,7 +3,7 @@ package Ex1;
 public class ComplexFunction implements complex_function{
 
     private function left,right;
-    private Operation Ope= Operation.None;
+    private Operation Ope;
     private Polynom p1 = new Polynom();
     //Constructors.
     public ComplexFunction(){
@@ -19,11 +19,11 @@ public class ComplexFunction implements complex_function{
         }
         else if (obj1 instanceof Monom){
             left = new Monom(obj1.toString());
-            Ope =Operation.None;
+
         }
         else{
             left = (function)obj1;
-            Ope = Operation.None;
+
         }
 
     }
@@ -163,8 +163,8 @@ public class ComplexFunction implements complex_function{
                 return left.f(x)+right.f(x);
 
             case Div:
-                Double pinf = 1.0/0.0;
-                Double ninf = -1.0/0.0;
+                Double pinf = Double.POSITIVE_INFINITY;
+                Double ninf = Double.NEGATIVE_INFINITY;
                 if(left.f(x)==pinf||right.f(x)==pinf){//takes care of deviding by zero end-point/
                     return pinf;
                 }
@@ -212,14 +212,14 @@ public class ComplexFunction implements complex_function{
         }
         s = s.toLowerCase().replace(" ","");
         int[] OpeArray = {s.indexOf("plus"), s.indexOf("mul"),s.indexOf("div"),s.indexOf("max"),s.indexOf("min")};
-        int first=0;
+        int first=s.length();
         for(int i = 0;i<OpeArray.length;i++){
             if (first>OpeArray[i]&&OpeArray[i]!=-1){
                 first = OpeArray[i];
             }
         }
         int counter = 1;
-        int bra1 = s.indexOf('(');
+        int bra1 = s.indexOf('(',first);
         int bra2 = s.lastIndexOf(')');
         String ope = (s.substring(first,bra1));
         int c =0;

@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class ComplexFunctionTest {
     private Polynom p1,p2;
     private Monom m1,m2;
-    private ComplexFunction c1,c2,c3;
 
 
 
@@ -20,21 +19,18 @@ class ComplexFunctionTest {
         p1 = new Polynom("2x^2+1");
         m1 = new Monom("3x^2");
         m2 = new Monom("2x^2");
-        c1 = new ComplexFunction();
-        c2 = new ComplexFunction();
-        c3 = new ComplexFunction();
     }
 
     @Test
     void plus() {
         m1 = new Monom("4");
-        c1 = new ComplexFunction(m1);
+        ComplexFunction c1 = new ComplexFunction(m1);
 
         c1.plus(m2);
 
         c1.plus(p1);
 
-        c2 = (ComplexFunction) c1.copy();
+        ComplexFunction c2 = (ComplexFunction) c1.copy();
         assertNotSame(c1,c2);
         assertTrue(c1.equals(c2));
         c1.plus(c2);
@@ -47,13 +43,13 @@ class ComplexFunctionTest {
     @Test
     void mul() {
         m1 = new Monom("4");
-        c1 = new ComplexFunction(m1);
+        ComplexFunction c1 = new ComplexFunction(m1);
 
         c1.mul(m2);
 
         c1.mul(p1);
 
-        c2 = (ComplexFunction) c1.copy();
+        ComplexFunction c2 = (ComplexFunction) c1.copy();
         assertNotSame(c1,c2);
         assertTrue(c1.equals(c2));
         c1.mul(c2);
@@ -61,7 +57,7 @@ class ComplexFunctionTest {
         //if x = 1 it should be 576
         assertEquals(576,c1.f(1));
         m2 = new Monom("0");
-        c3 = new ComplexFunction(m2);
+        ComplexFunction c3 = new ComplexFunction(m2);
         c1.mul(c3);
         assertEquals(0,c1.f(1));
 
@@ -70,13 +66,13 @@ class ComplexFunctionTest {
     @Test
     void div() {
         m1 = new Monom("4");
-        c1 = new ComplexFunction(m1);
+        ComplexFunction c1 = new ComplexFunction(m1);
 
         c1.plus(m2);
 
         c1.plus(p1);
 
-        c2 = (ComplexFunction) c1.copy();
+        ComplexFunction c2 = (ComplexFunction) c1.copy();
         assertNotSame(c1,c2);
         assertTrue(c1.equals(c2));
         c1.plus(c2);
@@ -100,7 +96,7 @@ class ComplexFunctionTest {
     void minMax() {
         m1 = new Monom("5x");
         m2 = new Monom("4x^2");
-        c1 = new ComplexFunction(m1);
+        ComplexFunction c1 = new ComplexFunction(m1);
         c1.max(m2);
 
         assertEquals(5,c1.f(1));//expected is left m1
@@ -117,7 +113,7 @@ class ComplexFunctionTest {
     void comp() {
         m1 = new Monom("5x");
         m2 = new Monom("4x^2");
-        c1 = new ComplexFunction(m1);
+        ComplexFunction c1 = new ComplexFunction(m1);
         c1.comp(m2);
         assertEquals(80,c1.f(2));//5(42^2) = 80
     }
